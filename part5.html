@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Part 5</title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+<div id="app">
+    <div class="product">
+        <div class="product-image">
+            <img v-bind:src="image" :alt="description" :title="title" :href="url">
+        </div>
+        <div class="product-info">
+            <h1>{{ product }}</h1>
+            <p v-if="inStock">In Stock</p>
+            <p v-else>Out of Stock</p>
+
+            <ul>
+                <li v-for="detail in details">{{ detail }}</li>
+            </ul>
+
+            <div v-for="variant in variants" :key="variant.variantId">
+                <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
+            </div>
+
+            <button v-on:click="addToCart">Add to Cart</button>
+            <button v-on:click="removeFromCart">Remove from Cart</button>
+
+            <div class="cart">
+                <p>Cart({{ cart }})</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            product: 'Ball',
+            image: './img/vmSocks-green-onWhite.jpg',
+            description: 'This is a image',
+            title: 'Image',
+            url: 'blog.nhasandev.com',
+            inStock: true,
+            inventory: 100,
+            details: ["80% cotton", "20% polyester", "Genre-Male"],
+            cart: 0,
+            variants: [
+                {
+                    variantId: 2234,
+                    variantColor: "green",
+                    variantImage: "./img/vmSocks-green-onWhite.jpg",
+                },
+                {
+                    variantId: 2235,
+                    variantColor: "blue",
+                    variantImage: "./img/vmSocks-blue-onWhite.jpg",
+                }
+            ],
+        },
+        methods: {
+            addToCart: function () {
+                this.cart += 1;
+            },
+            // ES6 methods ways function
+            removeFromCart() {
+                if(this.cart > 0)
+                this.cart -= 1;
+            },
+            updateProduct: function (variantImage) {
+                this.image = variantImage;
+            }
+        }
+
+    })
+</script>
+</html>

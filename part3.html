@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Part 3</title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+<div id="app">
+    <div class="product">
+        <div class="product-image">
+            <img v-bind:src="image" :alt="description" :title="title" :href="url">
+        </div>
+        <div class="product-info">
+            <h1>{{ product }}</h1>
+            <p v-if="inStock">In Stock</p>
+            <!--again another block-->
+            <small>Inventory</small>
+            <p v-else>Out of Stock</p>
+            <p v-if="inventory > 10">In Stock</p>
+            <p v-else-if="inventory < 10 && inventory > 0">Almost sold out</p>
+            <p v-else>Out of Stock</p>
+            <small>Display or Not Display</small>
+            <p v-show="inStock">On Sale</p>
+
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            product: 'Ball',
+            image: './img/vmSocks-green-onWhite.jpg',
+            description: 'This is a image',
+            title: 'Image',
+            url: 'blog.nhasandev.com',
+            inStock: true,
+            inventory: 100,
+        }
+    })
+</script>
+</html>
